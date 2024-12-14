@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run client:build && npm run Develop/server",
-    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
-    "server": "cd server && npm start",
-    "server:dev": "cd server && npm run dev",
+    "start": "npm run Develop/client:build && npm run Develop/server",
+    "start:dev": "concurrently \"npm run Develop/server:dev\" \"wait-on tcp:3001 && npm run Develop/client:dev\"",
+    "server": "cd Develop/server && npm start",
+    "server:dev": "cd Develop/server && npm run dev",
     "install": "cd Develop/server && npm install && cd ../client && npm install",
     "client:build": "cd Develop/client && npm run build && cd ../server && npm run build",
-    "client:dev": "cd client && npm run dev",
+    "client:dev": "cd Develop/client && npm run dev",
     "build": "cd Develop/client && npm run build && cd ../server && npm run build",
     "render-build": "npm install && npm run build"
   },
