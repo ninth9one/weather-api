@@ -43,7 +43,7 @@ class WeatherService {
     this.cityName = 'KHERSON';
   }
   // TODO: Create fetchLocationData method
-   private async fetchLocationData(query: string) {
+   private async fetchLocationData() {
       try {
         const response = await fetch(this.buildGeocodeQuery());
         if (!response.ok) {
@@ -89,7 +89,7 @@ return coordinates;
    private async fetchAndDestructureLocationData() {
     try {
       // Fetch location data
-      const locationData = await this.fetchLocationData(this.cityName);
+      const locationData = await this.fetchLocationData();
       
       // Extract the coordinates (lat, lon) from the fetched data
       const coordinates = this.destructureLocationData({
@@ -148,8 +148,9 @@ for (const data of filteredWeatherData) {
 return weatherForecast;
    }
   // TODO: Complete getWeatherForCity method
-   async getWeatherForCity() {
+  async getWeatherForCity(cityName: string) {
     try {
+      this.cityName = cityName;
       const locationCoordinates: Coordinates = await this.fetchAndDestructureLocationData();
       const weatherData = await this.fetchWeatherData(locationCoordinates);
       const currentWeather = this.parseCurrentWeather(weatherData.list[0]);
