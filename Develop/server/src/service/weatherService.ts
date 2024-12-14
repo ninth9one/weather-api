@@ -148,17 +148,11 @@ for (const data of filteredWeatherData) {
 return weatherForecast;
    }
   // TODO: Complete getWeatherForCity method
-   async getWeatherForCity(city: string) {
+   async getWeatherForCity() {
     try {
       const locationCoordinates: Coordinates = await this.fetchAndDestructureLocationData();
       const weatherData = await this.fetchWeatherData(locationCoordinates);
-      const currentWeather = new Weather(
-        weatherData.list[0].main.temp,
-        weatherData.list[0].pop,
-        weatherData.list[0].main.pressure,
-        weatherData.list[0].wind.speed,
-        weatherData.list[0].clouds.all
-      );
+      const currentWeather = this.parseCurrentWeather(weatherData.list[0]);
       return this.buildForecastArray(currentWeather, weatherData.list);
     } catch (error) {
       console.error(`Failed to get weather for "${this.cityName}" `, error);

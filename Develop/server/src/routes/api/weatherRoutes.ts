@@ -12,6 +12,7 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
     return;
   }
   try { const weatherData = await WeatherService.getWeatherForCity(cityName);
+    await saveCityToHistory(cityName);
     res.status(200).json(weatherData);
   } catch (error) {
     console.error(error);
@@ -61,7 +62,7 @@ console.log(`City ${cityName} saved to history`);
 }
     }
 // TODO: GET search history
-router.get('/history', async (req, res) => {
+router.get('/history', async (_, res) => {
   try {
     const cities = await historyService.getCities();
     res.status(200).json({
