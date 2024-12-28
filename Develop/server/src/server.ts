@@ -4,14 +4,16 @@ import path from 'path';
 dotenv.config();
 
 // Import the routes
-import routes from './routes/index.js';
+import routes from './routes/index.js'; 
+
+const __dirname = path.resolve();
 
 const app = express();
 
 const PORT = process.env.PORT || 3001;
 
 // TODO: Serve static files of entire client dist folder
-const staticPath = path.join(__dirname, '../../client/dist');
+const staticPath = path.join(__dirname, '../client/dist');
 app.use(express.static(staticPath));
 // TODO: Implement middleware for parsing JSON and urlencoded form data
 app.use(express.json());
